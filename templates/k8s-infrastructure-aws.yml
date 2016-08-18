@@ -31,16 +31,24 @@ resource_pools:
     availability_zone: (( meta.aws.az ))
 
 jobs:
-- name: master
+- name: etcd
   instances: 3
   networks:
   - name: default
     static_ips: (( static_ips(0, 1, 2) ))
-- name: minion
-  instances: 2
+
+- name: master
+  instances: 3
   networks:
   - name: default
-    static_ips: (( static_ips(3, 4) ))
+    static_ips: (( static_ips(3, 4, 5) ))
+
+- name: minion
+  instances: 3
+  networks:
+  - name: default
+    static_ips: (( static_ips(6, 7, 8) ))
+
 - name: guestbook-example
   lifecycle: errand
   instances: 1
@@ -54,4 +62,4 @@ properties:
     host: (( jobs.master.networks.default.static_ips.[0] ))
     hosts: (( jobs.master.networks.default.static_ips ))
   etcd:
-    machines: (( jobs.master.networks.default.static_ips jobs.minion.networks.default.static_ips ))
+    machines: (( jobs.etcd.networks.default.static_ips ))

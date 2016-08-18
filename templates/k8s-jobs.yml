@@ -1,9 +1,22 @@
 jobs:
+- name: etcd
+  <<: (( merge ))
+  templates:
+  - name: etcd
+  instances: 3
+  resource_pool: default
+  persistent_disk: 65536
+  networks:
+  - name: default
+    static_ips: (( merge ))
+  properties:
+    networks:
+      apps: default
+
 - name: master
   <<: (( merge ))
   templates:
   - name: docker
-  - name: etcd
   - name: flannel
   - name: kubernetes-minion
   - name: kubernetes-master
@@ -16,11 +29,11 @@ jobs:
   properties:
     networks:
       apps: default
+
 - name: minion
   <<: (( merge ))
   templates:
   - name: docker
-  - name: etcd
   - name: flannel
   - name: kubernetes-minion
   instances: 3
@@ -32,6 +45,7 @@ jobs:
   properties:
     networks:
       apps: default
+
 - name: create-kubernetes-dns
   lifecycle: errand
   templates:
@@ -43,6 +57,7 @@ jobs:
   properties:
     networks:
       apps: default
+
 - name: guestbook-example
   lifecycle: errand
   templates:
