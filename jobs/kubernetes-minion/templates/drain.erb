@@ -19,13 +19,12 @@ exec 2>> ${LOG_FILE}
 # Choose first non-self address; using self fails if etcd drain script runs first
 <% addr = spec.networks.to_h.values.first.ip %>
 API_HOST=<%= p('apiserver.hosts').select {|ip| ip != addr}.first %>
-NODE_HOST=<%= addr %>
 
-# TODO: Query against kubernetes.io/hostname after https://github.com/kubernetes/kubernetes/issues/31984 is resolved
-QUERY="{range .items[?(.status.addresses[0].address==\"${NODE_HOST}\")]} {.metadata.name} {end}"
-NODE=$(kubectl -s http://${API_HOST}:8080 get nodes -o jsonpath="${QUERY}")
+NODE=$(curl http://169.254.169.254/latest/meta-data/hostname)
 
-kubectl -s http://${API_HOST}:8080 drain ${NODE} --force
+# if we are in the cluster, then drain
+kubectl -s http://${API_HOST}:8080 get node | grep $HOSTNAME && kubectl -s http://${API_HOST}:8080 drain $HOSTNAME --force
+
 
 echo 0 >&3
 exit 0
