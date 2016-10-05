@@ -5,7 +5,7 @@ meta:
 compilation:
   cloud_properties:
     availability_zone: (( grab meta.aws.az ))
-    instance_type: m3.large
+    instance_type: m3.medium
 
 resource_pools:
 - name: default
@@ -14,7 +14,7 @@ resource_pools:
     name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
     version: latest
   cloud_properties:
-    instance_type: m3.large
+    instance_type: m3.medium
     availability_zone: (( grab meta.aws.az ))
 
 - name: master
@@ -23,7 +23,7 @@ resource_pools:
     name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
     version: latest
   cloud_properties:
-    instance_type: m3.large
+    instance_type: m3.medium
     availability_zone: (( grab meta.aws.az ))
     iam_instance_profile: (( param "specify master instance profile" ))
 
@@ -33,7 +33,7 @@ resource_pools:
     name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
     version: latest
   cloud_properties:
-    instance_type: m3.large
+    instance_type: m3.medium
     availability_zone: (( grab meta.aws.az ))
     iam_instance_profile: (( param "specify minion instance profile" ))
 
