@@ -91,6 +91,8 @@ properties:
     machines: (( param "specify etcd machines" ))
     require_ssl: false
     peer_require_ssl: false
+  flannel:
+    ip-range: 10.100.0.0/16
   certs: {}
   cloud-provider: ~
   cloud-credentials: {}
