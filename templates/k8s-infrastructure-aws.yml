@@ -43,7 +43,7 @@ resource_pools:
     name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
     version: latest
   cloud_properties:
-    instance_type: m3.large
+    instance_type: c3.2xlarge
     availability_zone: (( grab meta.aws.az ))
     iam_instance_profile: (( param "specify minion instance profile" ))
 
