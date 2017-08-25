@@ -21,35 +21,59 @@ exec 2>> ${LOG_FILE}
 API_HOST=<%= p('apiserver.hosts').select {|ip| ip != addr}.first %>
 NODE_HOST=<%= addr %>
 
+MAX_POD_RETRIES=60
+
+api_up() {
+  set +e
+  nc -vz $API_HOST 8080
+  rc=$?
+  set -e
+
+  return $rc
+}
+
+ready_wait() {
+  POD_RETRIES=0
+
+  set +e
+  while true; do
+    api_up
+    if [ $? -ne 0 ]; then
+      logger -t error "[BOSH Kubernetes Drain] Could not reach API host ${API_HOST}"
+    elif [ -z "$(kubectl -s http://${API_HOST}:8080 get pods -o 'jsonpath={.items[*].status.containerStatuses[?(@.ready==false)].name}')" ]; then
+      break
+    fi
+
+    if [ ${POD_RETRIES} -gt ${MAX_POD_RETRIES} ]; then
+      logger -t error "[BOSH Kubernetes Drain] Kubernetes pods not in a running state, and did not come back while waiting"
+      exit 1
+    else
+      POD_RETRIES=$((POD_RETRIES + 1))
+    fi
+
+    sleep 10
+  done
+
+  set -e
+
+  return 0
+}
+
+# make sure the cluster is in a good state before we start draining
+ready_wait
+
 # only attempt drain if we can communicate with the api host
-if /bin/nc -vz $API_HOST 8080; then
+if api_up; then
   QUERY="{range .items[?(.metadata.labels.kubernetes\.io/hostname==\"${NODE_HOST}\")]} {.metadata.name} {end}"
   NODE=$(kubectl -s http://${API_HOST}:8080 get nodes -o jsonpath="${QUERY}")
 
-  for i in {1..5}; do kubectl -s http://${API_HOST}:8080 drain ${NODE} --force --ignore-daemonsets --delete-local-data && break || sleep 5; done
+  for i in {1..5}; do
+    kubectl -s http://${API_HOST}:8080 drain ${NODE} --force --ignore-daemonsets --delete-local-data && break || sleep 5
+  done
 fi
 
-POD_RETRIES=0
-MAX_POD_RETRIES=240
-
-set +e
-while true; do
-  nc -vz $API_HOST 8080
-  if [ $? -ne 0 ]; then
-    logger -t error "[BOSH Kubernetes Drain] Could not reach API host ${API_HOST}"
-  elif [ -z "$(kubectl -s http://${API_HOST}:8080 get pods -o 'jsonpath={.items[*].status.containerStatuses[?(@.ready==false)].name}')" ]; then
-    break
-  fi
-
-  if [ ${POD_RETRIES} -gt ${MAX_POD_RETRIES} ]; then
-    logger -t error "[BOSH Kubernetes Drain] Kubernetes pods not in a running state, and did not come back while waiting"
-    exit 1
-  else
-    POD_RETRIES=$((POD_RETRIES + 1))
-  fi
-
-  sleep 1
-done
+# wait for the cluster to return to a good state after draining before we call this done
+ready_wait
 
 echo 0 >&3
 exit 0
