@@ -31,9 +31,9 @@ golang/go1.7.3.linux-amd64.tar.gz:
   object_id: 33f3095f-14b5-455e-9e21-1b6361590de2
   sha: ead40e884ad4d6512bcf7b3c7420dd7fa4a96140
 kubernetes/kubernetes-server-linux-amd64.tar.gz:
-  size: 364292419
-  object_id: ea7577d8-83be-4788-59d3-7df42a7ac06d
-  sha: 85f88c723881a092da67230936879909cb7882ac
+  size: 437429008
+  object_id: 726c2b7f-1018-4a53-6989-6b219dceec36
+  sha: f5206e70eafc86870201524c269012e10256d1eb
 python/Python-2.7.8.tgz:
   size: 14846119
   object_id: 3586ff5f-9ae0-4b6b-9b14-fd9ab85da701
