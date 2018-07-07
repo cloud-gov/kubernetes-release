@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
-gem 'guard'
+gem 'guard', '>= 2.12.8'
 gem 'guard-bosh'
