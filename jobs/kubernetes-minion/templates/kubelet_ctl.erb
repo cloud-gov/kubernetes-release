@@ -56,6 +56,7 @@ case $1 in
       <% if_p('kube-reserved') do |kube_reserved| %>--kube-reserved="<%= kube_reserved %>"<% end %> \
       <% if_p('system-reserved') do |system_reserved| %>--system-reserved="<%= system_reserved %>"<% end %> \
       <% if_p('eviction-hard') do |eviction_hard| %>--eviction-hard="<%= eviction_hard %>"<% end %> \
+      <% if_p('labels') do |labels| %>--node-labels="<%= labels.map{|key, value| "#{key}=#{value}"}.join(',') %>"<% end %> \
     1>> $LOG_DIR/kubelet.stdout.log \
     2>> $LOG_DIR/kubelet.stderr.log
     ;;
