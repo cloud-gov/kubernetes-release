@@ -34,6 +34,10 @@ properties:
   eviction-hard:
     description: Pod eviction resource threshold
 
+  labels:
+    description: Hash of node labels
+    default: {}
+
   cloud-provider:
     description: K8s cloud provider
     default: ""
