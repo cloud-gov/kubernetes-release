@@ -15,10 +15,10 @@ resources:
     username: {{bosh_username}}
     password: {{bosh_password}}
     deployment: {{bosh_deployment}}
-- name: aws-stemcell
+- name: aws-stemcell-xenial
   type: bosh-io-stemcell
   source:
-    name: bosh-aws-xen-hvm-ubuntu-trusty-go_agent
+    name: bosh-aws-xen-hvm-ubuntu-xenial-go_agent
 - name: release-repo
   type: git
   source:
@@ -90,7 +90,7 @@ jobs:
     - get: version
       passed: [rc]
     - get: bosh-stemcell
-      resource: aws-stemcell
+      resource: aws-stemcell-xenial
   - aggregate:
     - task: generate-warden-manifest
       file: release-repo/ci/generate-manifest.yml
