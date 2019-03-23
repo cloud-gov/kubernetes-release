@@ -10,7 +10,6 @@ templates:
   config/env.sh.erb: config/env.sh
   kubelet_ctl.erb: bin/kubelet_ctl
   proxy_ctl.erb: bin/proxy_ctl
-  pre-start.erb: bin/pre-start
   post-start.erb: bin/post-start
   drain.erb: bin/drain
 
