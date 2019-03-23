@@ -39,5 +39,5 @@ instance_groups:
   vm_extension: kubernetes-minion-profile
 
 tags:
-  KubernetesCluster: (( grab meta.log_group ))
+  KubernetesCluster: kubernetes-(( grab $TARGET_ENVIRONMENT ))
 
