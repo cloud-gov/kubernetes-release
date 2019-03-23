@@ -38,6 +38,4 @@ instance_groups:
           AWS_REGION: (( grab meta.aws.default_region ))
   vm_extension: kubernetes-minion-profile
 
-tags:
-  KubernetesCluster: kubernetes-(( grab $TARGET_ENVIRONMENT ))
 
