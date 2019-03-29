@@ -38,3 +38,7 @@ python/Python-2.7.11.tgz:
   size: 16856409
   object_id: 9519a8af-0118-44e6-738b-8a1e76277453
   sha: 62a0b1b703d42999cc4aa9ee3c55eb7efe35802a
+python/Python-3.5.6.tgz:
+  size: 20763023
+  object_id: 2377ae30-645e-48d7-7425-f579e6bb457c
+  sha: 4bbc89bfc9cfb0ec79f100bcba8a8f757ceb0d5b
