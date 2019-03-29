@@ -1,6 +1,2 @@
 set -e # abort script on any command that exit with a non zero value
-
-apt-get -y update
-apt-get install -y python-pip
-pip install --upgrade pip
 pip install awscli
