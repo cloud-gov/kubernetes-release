@@ -2,6 +2,6 @@ set -e # abort script on any command that exit with a non zero value
 
 unzip aws-cli/awscli-bundle.zip
 
-export PATH=$PATH:/usr/bin/python3
+export PATH=$PATH:/var/vcap/packages/python/bin
 
 ./awscli-bundle/install -i $BOSH_INSTALL_TARGET
