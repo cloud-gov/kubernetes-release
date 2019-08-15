@@ -1,7 +1,5 @@
 set -e # abort script on any command that exit with a non zero value
 
-unzip aws-cli/awscli-bundle.zip
-
-export PATH=$PATH:/var/vcap/packages/python/bin
-
-./awscli-bundle/install -i $BOSH_INSTALL_TARGET
+apt-get -y update
+apt-get install -y python-pip
+python -m pip install awscli
