@@ -2,4 +2,5 @@
 name: flannel
 dependencies: []
 files:
-- docker/src/flannel/*
+- docker-boshrelease/src/flannel/*
+
