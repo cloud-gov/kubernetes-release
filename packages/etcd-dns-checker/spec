@@ -5,4 +5,4 @@ dependencies:
   - golang1.7
 
 files:
-  - etcd/src/etcd-dns-checker/**/*.go
+  - etcd-release/src/etcd-dns-checker/**/*.go
