@@ -1,0 +1,4 @@
+---
+name: etcd-common
+files:
+- etcd-release/src/etcd-common/utils.sh
