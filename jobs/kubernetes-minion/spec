@@ -4,8 +4,6 @@ name: kubernetes-minion
 packages:
 - common
 - kubernetes
-- aws-cli
-- python
 
 templates:
   config/env.sh.erb: config/env.sh
