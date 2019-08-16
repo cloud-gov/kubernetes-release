@@ -21,7 +21,7 @@ exec 2>> ${LOG_FILE}
 API_HOST=<%= p('apiserver.hosts').select {|ip| ip != addr}.first %>
 NODE_HOST=<%= addr %>
 
-MAX_POD_RETRIES=60
+MAX_POD_RETRIES=30
 
 api_up() {
   set +e
@@ -46,7 +46,6 @@ ready_wait() {
 
     if [ ${POD_RETRIES} -gt ${MAX_POD_RETRIES} ]; then
       logger -t error "[BOSH Kubernetes Drain] Kubernetes pods not in a running state, and did not come back while waiting"
-      exit 1
     else
       POD_RETRIES=$((POD_RETRIES + 1))
     fi
