@@ -50,13 +50,6 @@ if [ -d $HOME/packages/java/jdk ]; then
   export PATH=$JAVA_HOME/bin:$PATH
 fi
 
-# setup CLASSPATH for all jars/ folders within packages
-export CLASSPATH=${CLASSPATH:-''}
-for package_jar_dir in $(ls -d /var/vcap/packages/*/*/*.jar)
-do
-  export CLASSPATH=${package_jar_dir}:$CLASSPATH
-done
-
 # Load job properties
 if [ -f $JOB_DIR/bin/job_properties.sh ]; then
   source $JOB_DIR/bin/job_properties.sh
