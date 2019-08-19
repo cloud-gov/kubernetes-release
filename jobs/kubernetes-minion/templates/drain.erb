@@ -46,6 +46,7 @@ ready_wait() {
 
     if [ ${POD_RETRIES} -gt ${MAX_POD_RETRIES} ]; then
       logger -t error "[BOSH Kubernetes Drain] Kubernetes pods not in a running state, and did not come back while waiting"
+      break
     else
       POD_RETRIES=$((POD_RETRIES + 1))
     fi
