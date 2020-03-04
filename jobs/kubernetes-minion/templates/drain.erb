@@ -16,8 +16,6 @@ exec 3>&1
 exec 1>> ${LOG_FILE}
 exec 2>> ${LOG_FILE}
 
-# Choose first non-self address; using self fails if etcd drain script runs first
-# the drain script will succeed after 5m regardless due to fixes in 2019.
 <% addr = spec.networks.to_h.values.first.ip %>
 API_HOST=<%= p('apiserver.hosts').first %>
 NODE_HOST=<%= addr %>
