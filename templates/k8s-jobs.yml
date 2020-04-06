@@ -11,6 +11,13 @@ instance_groups:
   networks:
   - name: services
     static_ips: (( param "specify static ips for consul instances" ))
+- name: pre-start-script
+  release: os-conf
+  properties:
+    script: |
+      #!/bin/bash
+      apt-get -y remove rsync
+      apt-get -y remove vim
 
 - name: etcd
   jobs:

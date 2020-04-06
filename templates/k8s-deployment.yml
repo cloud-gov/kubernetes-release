@@ -8,6 +8,9 @@ releases:
   version: latest
 - name: consul
   version: latest
+- name: os-conf
+  url: "https://bosh.io/d/github.com/cloudfoundry/os-conf-release?v=22.0.0"
+  sha1: "6946056ad69ae378cb89c9ef76daf66370a7dc6a" 
 
 update:
   canaries: 0
