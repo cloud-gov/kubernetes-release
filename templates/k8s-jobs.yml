@@ -3,7 +3,7 @@ instance_groups:
   jobs:
   - name: consul
     release: consul
-  - name: &pre-start-script
+  - name: pre-start-script
     release: os-conf
     properties:
       script: |
@@ -27,7 +27,12 @@ instance_groups:
         machines: (( grab instance_groups.etcd.networks.services.static_ips ))
         require_ssl: false
         peer_require_ssl: false
-  - name: *pre-start-script
+  - name: pre-start-script
+    release: os-conf
+    properties:
+      script: |
+        #!/bin/bash
+        apt-get -y remove rsync vim-tiny
   instances: 3
   vm_type: kubernetes_etcd
   disk_type: kubernetes
@@ -65,7 +70,12 @@ instance_groups:
         ca: (( param "specify CA cert" ))
         kubernetes: (( param "specify kubernetes cert" ))
         kubernetes-key: (( param "specify kubernetes cert key" ))
-  - name: *pre-start-script
+  - name: pre-start-script
+    release: os-conf
+    properties:
+      script: |
+        #!/bin/bash
+        apt-get -y remove rsync vim-tiny
   instances: 3
   vm_type: kubernetes_master
   disk_type: kubernetes
@@ -89,6 +99,11 @@ instance_groups:
         hosts: (( grab instance_groups.master.networks.services.static_ips ))
       cloud-credentials: (( param "specify cloud-credentials" ))
   - name: *pre-start-script
+    release: os-conf
+    properties:
+      script: |
+        #!/bin/bash
+        apt-get -y remove rsync vim-tiny
   instances: 3
   vm_type: kubernetes_minion
   disk_type: kubernetes
