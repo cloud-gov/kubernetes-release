@@ -98,7 +98,7 @@ instance_groups:
       apiserver:
         hosts: (( grab instance_groups.master.networks.services.static_ips ))
       cloud-credentials: (( param "specify cloud-credentials" ))
-  - name: *pre-start-script
+  - name: pre-start-script
     release: os-conf
     properties:
       script: |
