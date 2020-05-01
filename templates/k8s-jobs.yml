@@ -9,8 +9,8 @@ instance_groups:
       script: &apt_patch |
         #!/bin/bash
         apt-get update
-        apt-get -y remove rsync vim-tiny vim-gui-common
-        apt-get upgrade -y vim vim-common vim-runtime
+        apt-get -y remove rsync vim-tiny vim-gui-common python2.7-minimal python3.5-minimal
+        apt-get -y upgrade vim vim-common vim-runtime libarchive13 libsqlite3-0 sqlite3 libicu55 python2.7 python3.5
   instances: 3
   vm_type: kubernetes_consul
   disk_type: kubernetes
