@@ -6,9 +6,11 @@ instance_groups:
   - name: pre-start-script
     release: os-conf
     properties:
-      script: |
+      script: &apt_patch |
         #!/bin/bash
-        apt-get -y remove rsync vim-tiny
+        apt-get update
+        apt-get -y remove rsync vim-tiny vim-gui-common python2.7-minimal python3.5-minimal
+        apt-get -y upgrade vim libarchive13 libsqlite3-0 sqlite3 libicu55 python2.7 python3.5
   instances: 3
   vm_type: kubernetes_consul
   disk_type: kubernetes
@@ -30,9 +32,7 @@ instance_groups:
   - name: pre-start-script
     release: os-conf
     properties:
-      script: |
-        #!/bin/bash
-        apt-get -y remove rsync vim-tiny
+      script: *apt_patch
   instances: 3
   vm_type: kubernetes_etcd
   disk_type: kubernetes
@@ -73,9 +73,7 @@ instance_groups:
   - name: pre-start-script
     release: os-conf
     properties:
-      script: |
-        #!/bin/bash
-        apt-get -y remove rsync vim-tiny
+      script: *apt_patch
   instances: 3
   vm_type: kubernetes_master
   disk_type: kubernetes
@@ -101,9 +99,7 @@ instance_groups:
   - name: pre-start-script
     release: os-conf
     properties:
-      script: |
-        #!/bin/bash
-        apt-get -y remove rsync vim-tiny
+      script: *apt_patch
   instances: 3
   vm_type: kubernetes_minion
   disk_type: kubernetes
