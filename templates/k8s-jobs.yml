@@ -10,7 +10,7 @@ instance_groups:
         #!/bin/bash
         apt-get update
         apt-get -y remove rsync vim-tiny vim-gui-common python2.7-minimal python3.5-minimal
-        apt-get -y upgrade vim=2:7.4.1689-3ubuntu1.4 libarchive13=3.1.2-11ubuntu0.16.04.8 libsqlite3-0=3.11.0-1ubuntu1.4 sqlite3=3.11.0-1ubuntu1.4 libicu55=55.1-7ubuntu0.5 python2.7=2.7.12-1ubuntu0~16.04.11 python3.5=3.5.2-2ubuntu0~16.04.10
+        apt-get -y upgrade vim=2:8.2.0676-0york0~16.04 libarchive13=3.1.2-11ubuntu0.16.04.8 libsqlite3-0=3.11.0-1ubuntu1.4 sqlite3=3.11.0-1ubuntu1.4 libicu55=55.1-7ubuntu0.5 python2.7=2.7.12-1ubuntu0~16.04.11 python3.5=3.5.2-2ubuntu0~16.04.10
   instances: 3
   vm_type: kubernetes_consul
   disk_type: kubernetes
