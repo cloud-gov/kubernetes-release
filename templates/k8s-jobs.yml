@@ -21,11 +21,13 @@ instance_groups:
         apt-get -y upgrade libarchive13=3.1.2-11ubuntu0.16.04.8
         apt-get -y upgrade libsqlite3-0=3.11.0-1ubuntu1.5 sqlite3=3.11.0-1ubuntu1.5
         apt-get -y upgrade libicu55=55.1-7ubuntu0.5
-        apt-get -y upgrade python2.7=2.7.12-1ubuntu0~16.04.11
-        apt-get -y upgrade python3.5=3.5.2-2ubuntu0~16.04.10
+        apt-get -y upgrade python2.7=2.7.12-1ubuntu0~16.04.12 `# USN-4428-1`
+        apt-get -y upgrade python3.5=3.5.2-2ubuntu0~16.04.11 `# USN-4428-1`
         apt-get -y upgrade file=1:5.25-2ubuntu1.4 `# USN-3911-2`
         apt-get -y upgrade libmagic1=1:5.25-2ubuntu1.4 `# USN-3911-2`
         apt-get -y upgrade apt=1.2.32ubuntu0.1 `# USN-4359-1`
+        apt-get -y upgrade python3-software-properties=0.96.20.10 `# USN-4457-1`
+        apt-get -y upgrade software-properties-common=0.96.20.10  `# USN-4457-1`
         /bin/true
   instances: 3
   vm_type: kubernetes_consul
