@@ -8,6 +8,16 @@ instance_groups:
     properties:
       script: &apt_patch |
         #!/bin/bash
+        if [ -e /etc/apt/apt.conf.d/cloud-gov ]; then
+          echo "cloud.gov dpkg config file already exists!"
+        else
+          cat > /etc/apt/apt.conf.d/cloud-gov <<EOF
+          Dpkg::Options {
+            "--force-confdef";
+             "--force-confold";
+             }
+        EOF
+        fi
         apt-get update
         apt-get -y remove \
           rsync vim-tiny vim-gui-common python2.7-minimal python3.5-minimal \
