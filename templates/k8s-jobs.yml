@@ -38,6 +38,9 @@ instance_groups:
         apt-get -y upgrade apt=1.2.32ubuntu0.1 `# USN-4359-1`
         apt-get -y upgrade python3-software-properties=0.96.20.10 `# USN-4457-1`
         apt-get -y upgrade software-properties-common=0.96.20.10  `# USN-4457-1`
+        apt-get -y upgrade  libssl-dev=1.0.2g-1ubuntu4.17 `# USN-4504-1`
+        apt-get -y upgrade libssl1.0.0=1.0.2g-1ubuntu4.17 `# USN-4504-1`
+        apt-get -y upgrade     openssl=1.0.2g-1ubuntu4.17 `# USN-4504-1`
         /bin/true
   instances: 3
   vm_type: kubernetes_consul
