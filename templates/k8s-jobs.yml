@@ -41,6 +41,7 @@ instance_groups:
         apt-get -y upgrade  libssl-dev=1.0.2g-1ubuntu4.17 `# USN-4504-1`
         apt-get -y upgrade libssl1.0.0=1.0.2g-1ubuntu4.17 `# USN-4504-1`
         apt-get -y upgrade     openssl=1.0.2g-1ubuntu4.17 `# USN-4504-1`
+        /lib/systemd/systemd-sysv-install disable rsync `# rsync needs to be disabled even though it was removed.`
         /bin/true
   instances: 3
   vm_type: kubernetes_consul
