@@ -42,6 +42,16 @@ instance_groups:
         apt-get -y upgrade libssl1.0.0=1.0.2g-1ubuntu4.17 `# USN-4504-1`
         apt-get -y upgrade     openssl=1.0.2g-1ubuntu4.17 `# USN-4504-1`
         /lib/systemd/systemd-sysv-install disable rsync `# rsync needs to be disabled even though it was removed.`
+        #Script to mitigate CVE-2020-11935 from CG222
+        minute=$((RANDOM%60))
+        hour=$((RANDOM%8))
+        cat > /etc/cron.d/k8s-flush.sh <<EOF
+        #!/bin/bash
+        echo 2 | sudo tee /proc/sys/vm/drop_caches
+        EOF
+        chmod 0700 /etc/cron.d/k8s-flush.sh
+        chown "root:" /etc/cron.d/k8s-flush.sh
+        ! (cat /etc/crontab | grep -q "k8s-flush.sh") && (echo "$minute $hour * * * root /etc/cron.d/k8s-flush.sh" >> /etc/crontab)
         /bin/true
   instances: 3
   vm_type: kubernetes_consul
