@@ -25,7 +25,7 @@ instance_groups:
         apt-get -y upgrade dbus=1.10.6-1ubuntu3.6
         apt-get -y upgrade intel-microcode=3.20200609.0ubuntu0.16.04.1
         apt-get -y upgrade libc6=2.23-0ubuntu11.2
-        apt-get -y upgrade curl=7.47.0-1ubuntu2.16 libcurl3-gnutls=7.47.0-1ubuntu2.16 libcurl3=7.47.0-1ubuntu2.16  `# USN-4466-1`
+        apt-get -y upgrade curl=7.47.0-1ubuntu2.18 libcurl3-gnutls=7.47.0-1ubuntu2.18 libcurl3=7.47.0-1ubuntu2.18 libcurl4-openssl-dev=7.47.0-1ubuntu2.18 `# USN-4665-1`
         apt-get -y upgrade libdbus-1-3=1.10.6-1ubuntu3.6
         apt-get -y upgrade vim=2:7.4.1689-3ubuntu1.4
         apt-get -y upgrade libarchive13=3.1.2-11ubuntu0.16.04.8
@@ -35,13 +35,16 @@ instance_groups:
         apt-get -y upgrade python3.5=3.5.2-2ubuntu0~16.04.11 `# USN-4428-1`
         apt-get -y upgrade file=1:5.25-2ubuntu1.4 `# USN-3911-2`
         apt-get -y upgrade libmagic1=1:5.25-2ubuntu1.4 `# USN-3911-2`
-        apt-get -y upgrade apt=1.2.32ubuntu0.1 `# USN-4359-1`
+        apt-get -y upgrade apt=1.2.32ubuntu0.2 apt-utils=1.2.32ubuntu0.2 libapt-inst2.0=1.2.32ubuntu0.2 libapt-pkg5.0=1.2.32ubuntu0.2 `# USN-4667-1`
         apt-get -y upgrade python3-software-properties=0.96.20.10 `# USN-4457-1`
         apt-get -y upgrade software-properties-common=0.96.20.10  `# USN-4457-1`
         apt-get -y upgrade libssl-dev=1.0.2g-1ubuntu4.17 `# USN-4504-1`
-        apt-get -y upgrade libssl1.0.0=1.0.2g-1ubuntu4.17 `# USN-4504-1`
+        apt-get -y upgrade libssl1.0.0=1.0.2g-1ubuntu4.18 `# USN-4662-1`
         apt-get -y upgrade openssl=1.0.2g-1ubuntu4.17 `# USN-4504-1`
         apt-get -y upgrade slapd=2.4.42+dfsg-2ubuntu3.11 `# USN-4622-1 and USN 4634-1`
+        apt-get -y upgrade python-apt-common=1.1.0~beta1ubuntu0.16.04.11 python3-apt=1.1.0~beta1ubuntu0.16.04.11 `# USN-4668-1`
+        apt-get -y upgrade unzip=6.0-20ubuntu1.1 `# USN-4672-1`
+        apt-get -y upgrade libp11-kit0=0.23.2-5~ubuntu16.04.2 `# USN-4677-1`
         /lib/systemd/systemd-sysv-install disable rsync `# rsync needs to be disabled even though it was removed.`
         #Script to mitigate CVE-2020-11935 from CG222
         minute=$(expr $RANDOM % 60)
