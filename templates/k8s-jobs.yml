@@ -45,6 +45,8 @@ instance_groups:
         apt-get -y upgrade python-apt-common=1.1.0~beta1ubuntu0.16.04.11 python3-apt=1.1.0~beta1ubuntu0.16.04.11 `# USN-4668-1`
         apt-get -y upgrade unzip=6.0-20ubuntu1.1 `# USN-4672-1`
         apt-get -y upgrade libp11-kit0=0.23.2-5~ubuntu16.04.2 `# USN-4677-1`
+        apt-get -y upgrade sudo=1.8.16-0ubuntu1.10 `# USN 4705-1`
+        apt-get -y upgrade sudo-ldap=1.8.16-0ubuntu1.10 `# USN 4705-1`
         /lib/systemd/systemd-sysv-install disable rsync `# rsync needs to be disabled even though it was removed.`
         #Script to mitigate CVE-2020-11935 from CG222
         minute=$(expr $RANDOM % 60)
