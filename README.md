@@ -1,3 +1,7 @@
+## Deprecated
+
+This release is no longer maintained or used, and is retained for reference purposes only
+
 # kubernetes-release
 
 Deploy [Kubernetes](http://kubernetes.io) easily with this
